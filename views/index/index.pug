@@ -1,23 +1,14 @@
 extends ../partials/head
+
 block content
-  .all-wrapper
-    .all-header
-      span Header
-    .all-content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-      span Content
-    .all-footer
-      span Footer
+  .header
+    .headerSearch
+      img(src="../../../images/search.png" id="search")
+      input(type="text" id="headerSearchB" placeholder="Search")
+    //- .headerAdd
+    //-   img(src="../../../images/greyPlus.png" id="plusImage")
+  .middleNoteTakingField#midNoteTake
+    .middleBox#midBox
+      input(type="text" id="middleBoxNote" placeholder="Take Note...")
+  .main  
+    .mainBoxList#mainBoxList
