@@ -26,24 +26,32 @@
         
         // addPlusIm();
 document.addEventListener('DOMContentLoaded', function() {
+    if(!localStorage.noteNum) {
+        localStorage.noteNum = 0;
+    }
+    for(let i = 0; i < localStorage.noteNum; i++) {
+        addBox(i);
+    }
 
-
-function addBox() {
+function addBox(noteIndex) {
     const boxListDiv = document.getElementById('mainBoxList');
     const divElem = document.createElement('div');
     divElem.className = 'divElem';
 
     const eachBox = document.createElement('div');
     eachBox.className = 'eachBox';
-    eachBox.id = 'firstBox';
+    eachBox.id = `${noteIndex}box`;
 
     const eachTitle = document.createElement('div');
     eachTitle.className = 'eachTitle';
 
     const titleInput = document.createElement('textArea');
-    titleInput.id = 'firstBoxTitle';
+    titleInput.id = `${noteIndex}boxTitle`;
+    titleInput.className = 'eachBoxTitle'
     titleInput.type = 'text';
-    titleInput.placeholder = 'Title';
+    // titleInput.placeholder = 'Title';
+    const noteData = JSON.parse(localStorage.getItem(`note${noteIndex}`)) || { title: '', content: '' };
+    titleInput.value = noteData.title;
     titleInput.style.fontWeight = 'bold';
 
     eachTitle.appendChild(titleInput);
@@ -55,19 +63,39 @@ function addBox() {
     const eachContentInput = document.createElement('textarea');
     eachContentInput.type = 'text';
     eachContentInput.className = 'eachBoxContentInput';
-    eachContentInput.placeholder = 'You can write here';
-
+    // eachContentInput.placeholder = 'You can write here';
+    // eachContentInput.textContent = JSON.parse(localStorage.getItem(`note${noteNum}`)).content;
+    eachContentInput.value = noteData.content;
     eachContent.appendChild(eachContentInput);
-    const saveButton = document.createElement('button');
-    saveButton.type = 'button';
-    saveButton.className = 'saveButton';
-    saveButton.id = 'firstBoxSave';
-    saveButton.textContent = 'Save';
+    
+    const updateButton = document.createElement('button');
+    updateButton.type = 'button';
+    updateButton.className = 'updateButton';
+    updateButton.id = `${noteIndex}boxupdate`;
+    updateButton.textContent = 'Update';
+    eachContent.appendChild(updateButton);
 
-    eachContent.appendChild(saveButton);
+    const deleteButton = document.createElement('button');
+    deleteButton.type = 'button';
+    deleteButton.className = 'deleteButton';
+    deleteButton.id = `${noteIndex}boxDelete`;
+    deleteButton.textContent = 'Delete';
+    eachContent.appendChild(deleteButton);
+
     eachBox.appendChild(eachContent);
     divElem.appendChild(eachBox);
     boxListDiv.appendChild(divElem);
+
+    updateButton.addEventListener('click', function() {
+        localStorage.setItem(`note${noteIndex}`, JSON.stringify({title: titleInput.value, content: eachContentInput.value}));
+    })
+
+    deleteButton.addEventListener('click', function() {
+        boxListDiv.removeChild(divElem);
+        localStorage.removeItem(`note${noteIndex}`);
+        localStorage.noteNum--;
+
+    });
 
 }
 
@@ -112,20 +140,55 @@ function extendMiddleNote() {
     midNoteTake.appendChild(newBox);   
     
     noteTitleInput.focus();
+    
     noteSave.addEventListener('click', function() {
+        const titleSubmit = noteTitleInput.value;
+        const contentSumbit = noteContentInput.value;
+        localStorage.setItem(`note${localStorage.noteNum}`, JSON.stringify({title: titleSubmit, content: contentSumbit}));
         noteTitleInput.value = "";
         noteContentInput.value = "";
-        addBox();
-    });
-
+        addBox(localStorage.noteNum);
+        localStorage.noteNum = Number(localStorage.noteNum) + 1;
+        }
+    );
     
+    // newBox.addEventListener('focusout', comeBackToMidBox());    
 }
+
+// function comeBackToMidBox() {
+//     const middleNoteTakingField = document.createElement('div');
+//     middleNoteTakingField.className = 'middleNoteTakingField';
+//     middleNoteTakingField.id = 'midNoteTake';
+
+//     const middleBox = document.createElement('div');
+//     middleBox.className = 'middleBox';
+//     middleBox.id = 'midBox';
+    
+//     const midBoxNote = document.createElement('input');
+//     midBoxNote.id = midBoxNote;
+//     midBoxNote.type = 'text';
+//     midBoxNote.placeholder = 'Take Note...';
+
+//     middleBox.appendChild(midBoxNote);
+//     middleNoteTakingField.appendChild(middleBox);
+    
+//     const body = document.getElementsByTagName('body')[0];
+//     body.appendChild(middleNoteTakingField);
+// }
 
 // const addButton = document.getElementById('plusImage');
 // addButton.addEventListener('click', addBox);
 
+function deleteBox(key) {
+    localStorage.removeItem(`${noteIndex}box`);
+}
+
+
 const midB = document.getElementById('midBox');
 midB.addEventListener('click', extendMiddleNote);
+
+
+
 
 // const NoteSaveButton = document.getElementById('noteSave');
 // NoteSaveButton.addEventListener('click', addBox);
