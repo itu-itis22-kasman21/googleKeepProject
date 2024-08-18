@@ -29,15 +29,20 @@ document.addEventListener('DOMContentLoaded', function() {
     if(!localStorage.noteNum) {
         localStorage.noteNum = 0;
     }
-    if(!localStorage.maxElem) {
-        localStorage.maxElem = 0;
-    }
-    for(let i = 0; i < localStorage.maxElem; i++) {
-        if(localStorage[`note${i}`] == undefined) {
-            continue;
+
+    function loadBoxes() {
+        for(let i = 0; i < localStorage.length; i++) {
+            let key = localStorage.key(i);
+            if(key == 'noteNum') {
+                continue;
+            }
+            else {
+                let indexNote = localStorage.key(i).substring(4);
+                addBox(Number(indexNote));
+            }
         }
-        addBox(i);
     }
+    loadBoxes();
 
 function addBox(noteIndex) {
     const boxListDiv = document.getElementById('mainBoxList');
@@ -92,9 +97,14 @@ function addBox(noteIndex) {
     divElem.appendChild(eachBox);
     boxListDiv.appendChild(divElem);
     
+
+    
+    
     updateButton.addEventListener('click', function() {
         localStorage.setItem(`note${noteIndex}`, JSON.stringify({title: titleInput.value, content: eachContentInput.value}));
     })
+
+
     
     deleteButton.addEventListener('click', function() {
         boxListDiv.removeChild(divElem);
@@ -104,6 +114,30 @@ function addBox(noteIndex) {
     });
 
 }
+
+function shrinkMiddleNote() {
+    const mideNoteTakingField = document.getElementById('midNoteTake');
+    const extendedMidNote = document.getElementsByClassName('newBox')[0];
+    extendedMidNote.remove();
+
+    const backMid = document.createElement('div');
+    backMid.className = 'middleBox';
+    backMid.id = 'midBox';
+
+    const backMiddleBoxNote = document.createElement('input');
+    backMiddleBoxNote.id = 'middleBoxNote';
+    backMiddleBoxNote.type = 'text';
+    backMiddleBoxNote.placeholder = 'Take Note...';
+
+    backMid.appendChild(backMiddleBoxNote);
+    mideNoteTakingField.appendChild(backMid);
+
+    backMiddleBoxNote.focus();
+
+    backMid.addEventListener('keydown', extendMiddleNote);
+    // backMid.addEventListener('mouseover', extendMiddleNote);
+}
+
 
 function extendMiddleNote() {
     const mideNoteTakingField = document.getElementById('midNoteTake');
@@ -143,10 +177,11 @@ function extendMiddleNote() {
     
     noteContent.appendChild(noteSave);
     newBox.appendChild(noteContent);
-    midNoteTake.appendChild(newBox);   
+    mideNoteTakingField.appendChild(newBox);   
     
     noteTitleInput.focus();
     
+
     noteSave.addEventListener('click', function() {
         const titleSubmit = noteTitleInput.value;
         const contentSumbit = noteContentInput.value;
@@ -155,11 +190,10 @@ function extendMiddleNote() {
         noteContentInput.value = "";
         addBox(localStorage.noteNum);
         localStorage.noteNum++
-        localStorage.maxElem++;
+        noteTitleInput.focus(); // cursor will be on title input
     }
 );
 
-// newBox.addEventListener('focusout', comeBackToMidBox());    
 }
 
 // function comeBackToMidBox() {
@@ -186,14 +220,9 @@ function extendMiddleNote() {
 // const addButton = document.getElementById('plusImage');
 // addButton.addEventListener('click', addBox);
 
-function deleteBox(key) {
-    localStorage.removeItem(`${noteIndex}box`);
-}
-
 
 const midB = document.getElementById('midBox');
 midB.addEventListener('click', extendMiddleNote);
-
 
 
 
