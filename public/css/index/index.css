@@ -5,9 +5,6 @@ html {
     margin: 0;
     padding: 0;
 }  
-/* body {
-    background-color: #202124;
-} */
 :root {
     --height-header: 65px;
     --height-full: 100%;
@@ -33,7 +30,7 @@ html {
     gap: var(--gap-header);
     padding-bottom: 15px;
 }
-.headerSearch {
+.header-search {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -45,29 +42,21 @@ html {
     height: var(--height-full);
     background-color: #F1F3F4;
 }
-.headerSearch:focus-within {
+.header-search:focus-within {
     box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 10px -1px, rgba(0, 0, 0, 0.12) 0px 4px 8px -1px;
     background-color: white;
 }
-.headerSearch:focus-within #headerSearchB {
+.header-search:focus-within #header-search-symbol {
     background-color: white; 
 }
-.headerAdd {
-    width: auto;
-    height: var(--height-full);
-}
-#addButton {
-    width: var(--width-header-add-button);
-    height: var(--height-full);
-}
-#headerSearchB {
+#header-search-symbol {
     width: var(--width-header-search-button);
     height: var(--height-full);
     border: none;
     outline: none;
     background-color: #F1F3F4;
 }
-.middleNoteTakingField {
+.mid-note-write-container {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -75,7 +64,7 @@ html {
     width: auto;
     margin: 25px;
 }
-.newBox {
+.mid-large-box {
     width: 35%;
     height: 150px;
     display: flex;
@@ -84,33 +73,31 @@ html {
     justify-content: space-between;
     gap: 25px;
     padding: 10px;
-    /* box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; */
-    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
-.noteTitle {
+.mid-large-box-title {
     width: var(--width-full);
     height: var(--height-fBox-title);
 }
-#noteBoxTitleInput {
+#mid-large-box-title-input {
     width: 100%;
 }
-.noteBoxContent {
+.mid-large-box-content{
     position: relative;
     width: var(--width-full);
     height: calc(100% - var(--height-fBox-title) - var(--gap-bw-title-content));
 }   
-.noteBoxContent::placeholder {
+.mid-large-box-content::placeholder {
     position: absolute;
     top: 0;
     transform: translateY(0); /* Ensures the placeholder is at the top */
     text-align: left; /* Aligns the placeholder text to the left */
 }
-.noteBoxContentInput {
+.mid-large-box-content-input {
     width: 100%;
     height: calc(100% - 18px);
 }
-.noteSave {
+.mid-save-button {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -118,11 +105,11 @@ html {
     outline: 0;
     background-color: white;
 }
-.noteSave:hover {
+.mid-save-button:hover {
     background-color: #F1F3F4;
 }
 
-.middleBox {
+.mid-note-write {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -130,18 +117,16 @@ html {
     padding: 0 10px 0;
     height: 50px;
     width: 35%;
-    /* box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; */
-    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
-#middleBoxNote {
+#mid-note-input {
     height: 70%;
     width: 100%;
     border: 0;
     outline: 0;
 }
 
-.eachBox {
+.each-box {
     width: 100%;
     height: 200px;
     display: flex;
@@ -150,17 +135,15 @@ html {
     justify-content: space-between;
     gap: var(--gap-bw-title-content);
     padding: 10px;
-    /* box-shadow: rgba(0, 0, 0, 0.07) 0px 1px 2px, rgba(0, 0, 0, 0.07) 0px 2px 4px, rgba(0, 0, 0, 0.07) 0px 4px 8px, rgba(0, 0, 0, 0.07) 0px 8px 16px, rgba(0, 0, 0, 0.07) 0px 16px 32px, rgba(0, 0, 0, 0.07) 0px 32px 64px; */
-    /* box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px; */
     box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
 }
 
-.eachBoxTitle {
+.each-box-title {
     width: var(--width-full);
     height: 100%;
 }
 
-.eachBoxContent {
+.each-box-content {
     position: relative;
     width: var(--width-full);
     height: calc(100%);
@@ -175,15 +158,7 @@ html {
     width: 100%;
     height: calc(100% - 18px);
 }
-#firstBoxTitle, #firstBoxContent {
-    width: var(--width-full);
-    height: var(--height-full);
-    border: 0;
-    outline: 0;
-    resize: none;
-}
-
-.updateButton {
+.update-button {
     position: absolute;
     right: 0;
     bottom: 0;
@@ -191,10 +166,10 @@ html {
     outline: 0;
     background-color: white;
 }
-.updateButton:hover, .deleteButton:hover {
+.update-button:hover, .delete-button:hover {
     background-color: #F1F3F4;
 }
-.deleteButton {
+.delete-button {
     position: absolute;
     left: 0;
     bottom: 0;
@@ -202,8 +177,7 @@ html {
     outline: 0;
     background-color: white;
 }
-
-.mainBoxList {
+.note-boxes-container {
     width: auto;
     height: auto;
     list-style-type: none;
@@ -212,13 +186,9 @@ html {
     flex-wrap: wrap;
     gap: var(--gap-bw-main-boxes);
 }
-.divElem {
+.each-box-container {
     width: calc((100% - 3 * var(--gap-bw-main-boxes)) / 4);
     height: auto;
-}
-#search {
-    position: absolute;
-    left: 0;
 }
 #search {
     position: absolute;
@@ -226,11 +196,6 @@ html {
     height: 80%;
     width: auto;
 }
-#plusImage {
-    height: 100%;
-    width: auto;
-}
-
 img:hover {
     opacity: 0.5;
 }
@@ -238,4 +203,7 @@ textarea {
     border: 0;
     outline: 0;
     resize: none;
+}
+.gizle {
+    display: none;
 }

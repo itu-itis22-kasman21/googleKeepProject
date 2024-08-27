@@ -2,13 +2,12 @@ extends ../partials/head
 
 block content
   .header
-    .headerSearch
+    .header-search
       img(src="../../../images/search.png" id="search")
-      input(type="text" id="headerSearchB" placeholder="Search")
-    //- .headerAdd
-    //-   img(src="../../../images/greyPlus.png" id="plusImage")
-  .middleNoteTakingField#midNoteTake
-    .middleBox#midBox
-      input(type="text" id="middleBoxNote" placeholder="Take Note...")
+      input(type="text" id="header-search-symbol" placeholder="Search")
+  .mid-note-write-container#mid-note-write-container
+    .mid-note-write#mid-note-write
+      input(type="text" id="mid-note-input" placeholder="Take Note...")
   .main  
-    .mainBoxList#mainBoxList
+    .note-boxes-container#note-boxes-container    
+      
