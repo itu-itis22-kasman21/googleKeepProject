@@ -72,8 +72,8 @@ function addBox(noteIndex) {
     noteBoxesContainer.appendChild(eachBoxContainer);
 }
 
-// Function to extend the middle note input area
-function extendMiddleNote() {
+// Function to create the middle note input area
+function createMiddleNote() {
     const mideNoteTakingField = document.getElementById('mid-note-write-container');
     //removed older small note area
     const midNote = document.getElementById('mid-note-write');
@@ -123,27 +123,29 @@ function extendMiddleNote() {
     midLargeBoxTitleInput.focus();
 }
 
-function shrinkMiddleNote() {
+// function shrinkMiddleNote() {
 
-    const mideNoteTakingField = document.getElementById('mid-note-write-container');
-    const bigMidNote = document.getElementById('mid-large-box');
-    bigMidNote.remove();
+//     const mideNoteTakingField = document.getElementById('mid-note-write-container');
+//     const bigMidNote = document.getElementById('mid-large-box');
+//     bigMidNote.remove();
 
-    const midNoteWrite = document.createElement('div');
-    midNoteWrite.id = 'mid-note-write';
-    midNoteWrite.className = 'mid-note-write';
+//     const midNoteWrite = document.createElement('div');
+//     midNoteWrite.id = 'mid-note-write';
+//     midNoteWrite.className = 'mid-note-write';
 
-    const midNoteInput = document.createElement('input');
-    midNoteInput.id = 'mid-note-input';
-    midNoteInput.type = 'text';
-    midNoteInput.placeholder = 'Take Note...';
+//     const midNoteInput = document.createElement('input');
+//     midNoteInput.id = 'mid-note-input';
+//     midNoteInput.type = 'text';
+//     midNoteInput.placeholder = 'Take Note...';
 
-    midNoteWrite.appendChild(midNoteInput);
-    mideNoteTakingField.appendChild(midNoteWrite);
-}
+//     midNoteWrite.appendChild(midNoteInput);
+//     mideNoteTakingField.appendChild(midNoteWrite);
+// }
 
 function search(query) {
 
+
+    //hides all boxes
     for(let i = 0; i < localStorage.getItem('noteNum'); i++) {
         const hideBoxe = document.getElementsByClassName('each-box')[i];
         if(hideBoxe) {
@@ -165,8 +167,6 @@ function search(query) {
         if(title.includes(searchQuery) || content.includes(searchQuery)) {
             const showBox = document.getElementById(`box${key.substring(4)}`);
             showBox.classList.remove('gizle');
-            // const noteIndex = key.substring(4); // Extract index from key
-            // addBox(Number(noteIndex)); // Display matching note
         }
 
 
@@ -177,7 +177,7 @@ function search(query) {
 window.addEventListener('load', function () {
     initializeLocalStorage();
     loadBoxes();
-    extendMiddleNote();
+    createMiddleNote();
     
     // Single event listener for all clicks
     document.addEventListener('click', function (event) {
@@ -222,8 +222,11 @@ window.addEventListener('load', function () {
             addBox(localStorage.noteNum);
             localStorage.noteNum++;
             titleInput.focus(); // cursor will be on title input
+        } else if(target.id === 'search-button') {
+            const searchInput = document.getElementById('header-search-symbol');
+            search(searchInput.value);
         }
-    });
+    }); 
 
     document.addEventListener('keydown', function(event) {
         const searchInput = document.getElementById('header-search-symbol');
