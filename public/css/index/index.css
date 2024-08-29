@@ -1,11 +1,3 @@
-*{
-    box-sizing: border-box;
-    /* border: 1px solid red; */
-} 
-html {
-    margin: 0;
-    padding: 0;
-}  
 :root {
     --height-header: 50px;
     --height-full: 100%;
@@ -21,6 +13,28 @@ html {
     --gap-header: 10px;
     --gap-bw-title-content: 10px;
     --gap-bw-main-boxes: 10px;
+
+    --theme-color: white;
+    --text-color: black;
+    --border: none;
+
+    
+    --search-box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 10px -1px, rgba(0, 0, 0, 0.12) 0px 4px 8px -1px;
+    --search-background: #F1F3F4;
+
+    --boxes-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+}
+*{
+    box-sizing: border-box;
+    /* border: 1px solid red; */
+    color: var(--text-color);
+} 
+html {
+    margin: 0;
+    padding: 0;
+}  
+body {
+    background-color: var(--theme-color);
 }
 .header {
     display: flex;
@@ -42,22 +56,29 @@ html {
     position: relative;
     width: var(--width-header-search);
     height: var(--height-full);
-    background-color: #F1F3F4;
+    background-color: var(--search-background);
+    border: var(--border);
 }
 .header-search:focus-within {
-    box-shadow: rgba(0, 0, 0, 0.2) 0px 8px 10px -1px, rgba(0, 0, 0, 0.12) 0px 4px 8px -1px;
+    box-shadow: var(--search-box-shadow);
     background-color: white;
 }
-.header-search:focus-within #header-search-symbol {
+.header-search:focus-within #header-search-input {
     background-color: white; 
 }
-#header-search-symbol {
+#dark-mode-button, #day-mode-button {
+    position: relative;
+    height: 50px;
+    width: auto;
+}
+#header-search-input {
     width: var(--width-header-search-button);
     height: var(--height-full);
     border: none;
     outline: none;
-    background-color: #F1F3F4;
+    background-color: var(--search-background);
 }
+
 .mid-note-write-container {
     display: flex;
     justify-content: center;
@@ -67,6 +88,7 @@ html {
     margin:25px 40px 25px;
 }
 .mid-note-write {
+    border: var(--border);
     display: flex;
     justify-content: center;
     align-items: center;
@@ -74,13 +96,14 @@ html {
     padding: 0 10px 0;
     height: 100px;
     width: 500px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;   
+    box-shadow: var(--boxes-shadow);   
 }
 #mid-note-input {
     height: 70%;
     width: 100%;
     border: 0;
     outline: 0;
+    background-color: var(--theme-color);
 }
 #mid-note-input::placeholder {
     position: absolute;
@@ -97,7 +120,8 @@ html {
     justify-content: space-between;
     gap: 25px;
     padding: 10px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    box-shadow: var(--boxes-shadow);
+    border: var(--border);
 }
 .mid-large-box-title {
     width: var(--width-full);
@@ -105,11 +129,13 @@ html {
 }
 #mid-large-box-title-input {
     width: 100%;
+    background-color: var(--theme-color);
 }
 .mid-large-box-content{
     position: relative;
     width: var(--width-full);
     height: calc(100% - var(--height-fBox-title) - var(--gap-bw-title-content));
+    
 }   
 .mid-large-box-content::placeholder {
     position: absolute;
@@ -120,6 +146,7 @@ html {
 .mid-large-box-content-input {
     width: 100%;
     height: calc(100% - 18px);
+    background-color: var(--theme-color);
 }
 .mid-save-button {
     position: absolute;
@@ -127,10 +154,11 @@ html {
     bottom: 0;
     border: 0;
     outline: 0;
-    background-color: white;
+    background-color: var(--theme-color);
+    color: #5F6368
 }
 .mid-save-button:hover {
-    background-color: #F1F3F4;
+    opacity: 0.5;
 }
 
 
@@ -143,12 +171,17 @@ html {
     justify-content: space-between;
     gap: var(--gap-bw-title-content);
     padding: 10px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+    background-color: var(--theme-color);
+    box-shadow: var(--boxes-shadow);
+    border: var(--border);
+    
 }
 
 .each-box-title {
     width: var(--width-full);
     height: 100%;
+    background-color: var(--theme-color);
+
 }
 
 .each-box-content {
@@ -162,9 +195,10 @@ html {
     transform: translateY(0); /* Ensures the placeholder is at the top */
     text-align: left; /* Aligns the placeholder text to the left */
 }
-.eachBoxContentInput {
+.each-box-content-input {
     width: 100%;
     height: calc(100% - 18px);
+    background-color: var(--theme-color);
 }
 .update-button {
     position: absolute;
@@ -172,10 +206,13 @@ html {
     bottom: 0;
     border: 0;
     outline: 0;
-    background-color: white;
+    background-color: var(--theme-color);
+    color:  #5F6368;
+
+
 }
 .update-button:hover, .delete-button:hover {
-    background-color: #F1F3F4;
+    opacity: 0.5;
 }
 .delete-button {
     position: absolute;
@@ -183,7 +220,9 @@ html {
     bottom: 0;
     border: 0;
     outline: 0;
-    background-color: white;
+    background-color: var(--theme-color);
+    color:  #5F6368;
+
 }
 .note-boxes-container {
     width: auto;
@@ -206,6 +245,7 @@ html {
     height: 80%;
     width: auto;
 }
+
 img:hover {
     opacity: 0.5;
 }

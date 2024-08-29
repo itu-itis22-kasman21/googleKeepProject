@@ -48,7 +48,7 @@ function addBox(noteIndex) {
 
     const eachContentInput = document.createElement('textarea');
     eachContentInput.type = 'text';
-    eachContentInput.className = 'eachBoxContentInput';
+    eachContentInput.className = 'each-box-content-input';
     eachContentInput.id = `box-content${noteIndex}`;
     eachContentInput.value = noteData.content;
     eachContent.appendChild(eachContentInput);
@@ -172,13 +172,45 @@ function search(query) {
 
     }
 }
+var darkButtonClick = 0;
+function darkMode() {
+    //body, header search, header search symbol, mid-note-input, mid-large-box-title-input, mid-large-box-content-input, 
+    //mid-save-button, each-box, each-box-title, each-box-content-input, update-button, delete-button, #202124
+
+    //header-search, mid-note-write, mid-large-box, 
+    const root = document.documentElement;
+    const darkButton = document.getElementById('dark-mode-button');
+    const dayButton = document.getElementById('day-mode-button');
+    if(darkButtonClick % 2) {
+        root.style.setProperty('--theme-color', 'white');
+        root.style.setProperty('--text-color', 'black');
+        root.style.setProperty('--border', 'none');
+        root.style.setProperty('--search-box-shadow', 'rgba(0, 0, 0, 0.2) 0px 8px 10px -1px, rgba(0, 0, 0, 0.12) 0px 4px 8px -1px');
+        root.style.setProperty('--boxes-shadow', 'rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px');
+        root.style.setProperty('--search-background', '#F1F3F4');
+        darkButton.classList.remove('gizle');
+        dayButton.classList.add('gizle');
+    }
+    else {
+        root.style.setProperty('--theme-color', '#202124');
+        root.style.setProperty('--text-color', '#E8EAED');
+        root.style.setProperty('--border', '1px solid #5F6368');
+        root.style.setProperty('--search-box-shadow', 'none');
+        root.style.setProperty('--boxes-shadow', 'none');
+        root.style.setProperty('--search-background', 'theme-color');
+        darkButton.classList.add('gizle');
+        dayButton.classList.remove('gizle');
+    }
+    darkButtonClick++;
+}
 
 // Main function to run when the window loads
 window.addEventListener('load', function () {
     initializeLocalStorage();
     loadBoxes();
     createMiddleNote();
-    
+    const dayButton = document.getElementById('day-mode-button');
+    dayButton.classList.add('gizle');
     // Single event listener for all clicks
     document.addEventListener('click', function (event) {
         const target = event.target;
@@ -223,16 +255,24 @@ window.addEventListener('load', function () {
             localStorage.noteNum++;
             titleInput.focus(); // cursor will be on title input
         } else if(target.id === 'search-button') {
-            const searchInput = document.getElementById('header-search-symbol');
+            const searchInput = document.getElementById('header-search-input');
             search(searchInput.value);
+        }
+        else if(target.id === 'dark-mode-button' || target.id === 'day-mode-button') {
+            darkMode();
         }
     }); 
 
     document.addEventListener('keydown', function(event) {
-        const searchInput = document.getElementById('header-search-symbol');
+        const searchInput = document.getElementById('header-search-input');
 
-        if(event.target.id == 'header-search-symbol' && event.key == 'Enter') {
+        if(event.target.id == 'header-search-input' && event.key == 'Enter') {
             search(event.target.value);
+        }
+        else if(event.target.id === 'mid-note-input') {
+            midNote.classList.add('gizle');
+            midLargeBox.classList.remove('gizle');
+            midLargeBoxInput.focus();
         }
     })
     
