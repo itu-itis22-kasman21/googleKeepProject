@@ -3,13 +3,16 @@ function initializeLocalStorage() {
     if (!localStorage.noteNum) {
         localStorage.noteNum = 0;
     }
+    if(!localStorage.darkButtonClick) {
+        localStorage.darkButtonClick = 0;
+    }
 }
 
 // Function to load all note boxes from local storage
 function loadBoxes() {
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
-        if (key === 'noteNum') {
+        if (key === 'noteNum' || key == 'darkButtonClick') {
             continue;
         } else {
             let indexNote = localStorage.key(i).substring(4);
@@ -123,28 +126,7 @@ function createMiddleNote() {
     midLargeBoxTitleInput.focus();
 }
 
-// function shrinkMiddleNote() {
-
-//     const mideNoteTakingField = document.getElementById('mid-note-write-container');
-//     const bigMidNote = document.getElementById('mid-large-box');
-//     bigMidNote.remove();
-
-//     const midNoteWrite = document.createElement('div');
-//     midNoteWrite.id = 'mid-note-write';
-//     midNoteWrite.className = 'mid-note-write';
-
-//     const midNoteInput = document.createElement('input');
-//     midNoteInput.id = 'mid-note-input';
-//     midNoteInput.type = 'text';
-//     midNoteInput.placeholder = 'Take Note...';
-
-//     midNoteWrite.appendChild(midNoteInput);
-//     mideNoteTakingField.appendChild(midNoteWrite);
-// }
-
 function search(query) {
-
-
     //hides all boxes
     for(let i = 0; i < localStorage.getItem('noteNum'); i++) {
         const hideBoxe = document.getElementsByClassName('each-box')[i];
@@ -155,7 +137,7 @@ function search(query) {
 
     for(let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
-        if(key == 'noteNum') {
+        if(key == 'noteNum' || key == 'darkButtonClick') {
             continue;
         }
 
@@ -172,17 +154,12 @@ function search(query) {
 
     }
 }
-var darkButtonClick = 0;
 function darkMode() {
-    //body, header search, header search symbol, mid-note-input, mid-large-box-title-input, mid-large-box-content-input, 
-    //mid-save-button, each-box, each-box-title, each-box-content-input, update-button, delete-button, #202124
-
-    //header-search, mid-note-write, mid-large-box, 
     const root = document.documentElement;
     const darkButton = document.getElementById('dark-mode-button');
     const dayButton = document.getElementById('day-mode-button');
     const darkSearchInputColor = document.getElementById('header-search-input');
-    if(darkButtonClick % 2) {
+    if(localStorage.darkButtonClick % 2 == 0) { // make it day mode
         root.style.setProperty('--theme-color', 'white');
         root.style.setProperty('--text-color', 'black');
         root.style.setProperty('--border', 'none');
@@ -192,7 +169,7 @@ function darkMode() {
         darkButton.classList.remove('gizle');
         dayButton.classList.add('gizle');
     }
-    else {
+    else {  // make it dark mode
         root.style.setProperty('--theme-color', '#202124');
         root.style.setProperty('--text-color', '#E8EAED');
         root.style.setProperty('--border', '1px solid #5F6368');
@@ -203,33 +180,30 @@ function darkMode() {
         dayButton.classList.remove('gizle');
         darkSearchInputColor.style.color = 'black';
     }
-    darkButtonClick++;
 }
 
 // Main function to run when the window loads
 window.addEventListener('load', function () {
     initializeLocalStorage();
+    darkMode();
     loadBoxes();
     createMiddleNote();
-    const dayButton = document.getElementById('day-mode-button');
-    dayButton.classList.add('gizle');
+
     // Single event listener for all clicks
     document.addEventListener('click', function (event) {
         const target = event.target;
         
-        const midNote = document.getElementById('mid-note-write');
-        const midNoteInput = document.getElementById('mid-note-input')
-        
+        const midNote = document.getElementById('mid-note-write');        
         const midLargeBox = document.getElementById('mid-large-box');
         const midLargeBoxInput = document.getElementById('mid-large-box-title-input')
         
         // Check if the clicked element or any of its parents have the class 'mid-note-write'
-        if (target.id === 'mid-note-write' || target.closest('.mid-note-write')) {
+        if (target.closest('.mid-note-write')) {
             midNote.classList.add('gizle');
             midLargeBox.classList.remove('gizle');
             midLargeBoxInput.focus();
         } 
-        else if (!target.closest('#mid-note-write-container') && document.getElementById('mid-large-box')) {
+        else if (!target.closest('.mid-note-write')) {
             midNote.classList.remove('gizle');
             midLargeBox.classList.add('gizle');
         }
@@ -262,6 +236,7 @@ window.addEventListener('load', function () {
             search(searchInput.value);
         }
         else if(target.id === 'dark-mode-button' || target.id === 'day-mode-button') {
+            localStorage.darkButtonClick++;
             darkMode();
         }
     }); 
