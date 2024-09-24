@@ -72,7 +72,7 @@ function addBox(noteIndex) {
 
     eachBox.appendChild(eachContent);
     eachBoxContainer.appendChild(eachBox);
-    noteBoxesContainer.appendChild(eachBoxContainer);
+    noteBoxesContainer.insertBefore(eachBoxContainer, noteBoxesContainer.firstChild); // new added item become first item
 }
 
 // Function to create the middle note input area
@@ -134,7 +134,6 @@ function search(query) {
             hideBoxe.classList.add('gizle');    
         }
     }
-
     for(let i = 0; i < localStorage.length; i++) {
         const key = localStorage.key(i);
         if(key == 'noteNum' || key == 'darkButtonClick') {
@@ -150,8 +149,6 @@ function search(query) {
             const showBox = document.getElementById(`box${key.substring(4)}`);
             showBox.classList.remove('gizle');
         }
-
-
     }
 }
 function darkMode() {
@@ -203,7 +200,7 @@ window.addEventListener('load', function () {
             midLargeBox.classList.remove('gizle');
             midLargeBoxInput.focus();
         } 
-        else if (!target.closest('.mid-note-write')) {
+        else if (!target.closest('.mid-large-box')) {
             midNote.classList.remove('gizle');
             midLargeBox.classList.add('gizle');
         }

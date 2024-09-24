@@ -3,12 +3,48 @@
     --height-full: 100%;
     --height-fBox-title: 10%;
 
-    --width-header: calc(100% - 50px);
-    --width-header-search: 600px;
+    --width-header: calc(100% -50px);
     --width-header-add: 10%;
     --width-header-add-button: 100%;
     --width-header-search-button: 100%;
     --width-full: 100%;
+
+    --header-margin: 10px 25px 0;
+    --header-padding: 0 10px 0;
+    
+    --header-search-width: 600px;
+    --header-search-padding-right: 10px;
+    --header-search-padding-left: 50px;
+    --header-search-border-radius: 10px;
+
+    --dark-day-button-height: 50px;
+
+    --mid-note-write-container-margin: 25px 40px 25px; 
+
+    --mid-note-write-border-radius: 10px;
+    --mid-note-write-padding: 0 10px 0;
+    --mid-note-write-height: 100px;
+    --mid-note-write-width: 500px;
+
+    --mid-note-input-height: 70%;
+    --mid-note-input-width: 100%;
+
+    --mid-large-box-width: 500px;
+    --mid-large-box-height: 150px;
+    --mid-large-box-gap: 25px;
+    --mid-large-box-padding: 10px;
+    
+    --each-box-container-width: 400px;
+    
+    --each-box-padding: 10px;
+    --each-box-width: 100%;
+    --each-box-height: 200px; 
+    
+    --note-boxes-container-padding: 0 10px 0;
+
+    --search-button-left: 10px;
+    --search-button-height: 80%;
+
 
     --gap-header: 10px;
     --gap-bw-title-content: 10px;
@@ -26,7 +62,6 @@
 }
 *{
     box-sizing: border-box;
-    /* border: 1px solid red; */
     color: var(--text-color);
 } 
 html {
@@ -43,18 +78,29 @@ body {
     width: var(--width-header);
     height: var(--height-header);
     gap: var(--gap-header);
-    margin: 10px 25px 0;
+    margin: var(--header-margin);
+    padding: var(--header-padding);
+    flex-wrap: nowrap;
 }
+.header-search-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
 .header-search {
     display: flex;
     flex-direction: row;
     align-items: center;
-    justify-content: center;
-    padding-right: 10px;
-    border-radius: 10px;
-    padding-left: 50px;
+    justify-content: space;
+    padding-right: var(--header-search-padding-right);
+    padding-left: var(--header-search-padding-left);
+    border-radius: var(--header-search-border-radius);
     position: relative;
-    width: var(--width-header-search);
+
+    width: var(--header-search-width);
     height: var(--height-full);
     background-color: var(--search-background);
     border: var(--border);
@@ -68,8 +114,9 @@ body {
 }
 #dark-mode-button, #day-mode-button {
     position: relative;
-    height: 50px;
+    height: var(--dark-day-button-height);
     width: auto;
+    margin-left: auto;
 }
 #header-search-input {
     width: var(--width-header-search-button);
@@ -85,22 +132,22 @@ body {
     align-items: center;
     height: auto;
     width: auto;
-    margin:25px 40px 25px;
+    margin: var(--mid-note-write-container-margin);
 }
 .mid-note-write {
     border: var(--border);
     display: flex;
     justify-content: center;
     align-items: center;
-    border-radius: 10px;
-    padding: 0 10px 0;
-    height: 100px;
-    width: 500px;
+    border-radius: var(--mid-note-write-border-radius);
+    padding:var(--mid-note-write-padding) ;
+    height: var(--mid-note-write-height);
+    width: var(--mid-note-write-width);
     box-shadow: var(--boxes-shadow);   
 }
 #mid-note-input {
-    height: 70%;
-    width: 100%;
+    height: var(--mid-note-input-height);
+    width: var(--mid-note-input-width);
     border: 0;
     outline: 0;
     background-color: var(--theme-color);
@@ -108,18 +155,18 @@ body {
 #mid-note-input::placeholder {
     position: absolute;
     top: 0;
-    transform: translateY(0); /* Ensures the placeholder is at the top */
-    text-align: left; /* Aligns the placeholder text to the left */
+    transform: translateY(0); 
+    text-align: left;
 }
 .mid-large-box {
-    width: 500px;
-    height: 150px;
+    width: var(--mid-large-box-width);
+    height: var(--mid-large-box-height);
+    border-radius: var(--header-search-border-radius);
+    gap: var(--mid-large-box-gap);
+    padding: var(--mid-large-box-padding);
     display: flex;
-    border-radius: 10px;
     flex-direction: column;
     justify-content: space-between;
-    gap: 25px;
-    padding: 10px;
     box-shadow: var(--boxes-shadow);
     border: var(--border);
 }
@@ -161,16 +208,15 @@ body {
     opacity: 0.5;
 }
 
-
 .each-box {
-    width: 100%;
-    height: 200px;
+    width: var(--each-box-width);
+    height: var(--each-box-height);
+    border-radius: var(--header-search-border-radius);
+    padding: var(--each-box-padding);
     display: flex;
-    border-radius: 10px;
     flex-direction: column;
     justify-content: space-between;
     gap: var(--gap-bw-title-content);
-    padding: 10px;
     background-color: var(--theme-color);
     box-shadow: var(--boxes-shadow);
     border: var(--border);
@@ -231,18 +277,17 @@ body {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 0 10px 0;
+    padding: var(--note-boxes-container-padding);
     gap: var(--gap-bw-main-boxes);
 }
 .each-box-container {
-    /* width: calc((100% - 3 * var(--gap-bw-main-boxes)) / 4); */
-    width: 400px;
+    width: var(--each-box-container-width);
     height: auto;
 }
 #search-button {
     position: absolute;
-    left: 10px;
-    height: 80%;
+    left: var(--search-button-left);
+    height: var(--search-button-height);
     width: auto;
 }
 
@@ -263,6 +308,17 @@ textarea {
         width: 100%;
         height: auto;
     }  
+}
+@media (max-width: 768px) {
+
+    
+    .header-search-container {
+        max-width: 100%; /* Allow search to use full width on small screens */
+    }
+    
+    .header-search {
+        min-width: 100%; /* Ensure search input can grow */
+    }
 }
 
 @media (min-width: 650px) and (max-width: 900px) {
