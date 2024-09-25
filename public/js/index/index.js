@@ -11,7 +11,7 @@ function initializeLocalStorage() {
 function loadBoxes() {
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
-        if (localStorage.key(i).startsWith("note")) {
+        if (key.startsWith("note") && key != "noteNum")  {
             let indexNote = localStorage.key(i).substring(4);
             addBox(Number(indexNote));
 
