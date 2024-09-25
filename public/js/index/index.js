@@ -7,7 +7,6 @@ function initializeLocalStorage() {
         localStorage.darkButtonClick = 0;
     }
 }
-
 // Function to load all note boxes from local storage
 function loadBoxes() {
     for (let i = 0; i < localStorage.length; i++) {
@@ -20,12 +19,9 @@ function loadBoxes() {
         }
     }
 }
-
 // Function to add a single note box to the page
 function addBox(noteIndex) {
     const noteBoxesContainer = document.getElementById('note-boxes-container');
-    const eachBoxContainer = document.createElement('div');
-    eachBoxContainer.className = 'each-box-container';
 
     const eachBox = document.createElement('div');
     eachBox.className = 'each-box';
@@ -71,61 +67,58 @@ function addBox(noteIndex) {
     eachContent.appendChild(deleteButton);
 
     eachBox.appendChild(eachContent);
-    eachBoxContainer.appendChild(eachBox);
-    noteBoxesContainer.insertBefore(eachBoxContainer, noteBoxesContainer.firstChild); // new added item become first item
+    noteBoxesContainer.insertBefore(eachBox, noteBoxesContainer.firstChild); // new added item become first item
 }
-
 // Function to create the middle note input area
-function createMiddleNote() {
-    const mideNoteTakingField = document.getElementById('mid-note-write-container');
-    //removed older small note area
-    const midNote = document.getElementById('mid-note-write');
-    // midNote.classList.add('gizle');
+// function createMiddleNote() {
+//     const mideNoteTakingField = document.getElementById('mid-note-write-container');
+//     //removed older small note area
+//     const midNote = document.getElementById('mid-note-write');
+//     // midNote.classList.add('gizle');
 
 
-    //this is container of middle note taking area
+//     //this is container of middle note taking area
     
-    //new big note taking area
-    const midLargeBox = document.createElement('div');
-    midLargeBox.className = 'mid-large-box';
-    midLargeBox.id = 'mid-large-box'
-    midLargeBox.classList.add('gizle');
+//     //new big note taking area
+//     const midLargeBox = document.createElement('div');
+//     midLargeBox.className = 'mid-large-box';
+//     midLargeBox.id = 'mid-large-box'
+//     midLargeBox.classList.add('gizle');
 
-    const midLargeBoxTitle = document.createElement('div');
-    midLargeBoxTitle.className = 'mid-large-box-title';
+//     const midLargeBoxTitle = document.createElement('div');
+//     midLargeBoxTitle.className = 'mid-large-box-title';
 
-    const midLargeBoxTitleInput = document.createElement('textarea');
-    midLargeBoxTitleInput.id = 'mid-large-box-title-input';
-    midLargeBoxTitleInput.type = 'text';
-    midLargeBoxTitleInput.placeholder = 'Title';
-    midLargeBoxTitleInput.style.fontWeight = 'bold';
+//     const midLargeBoxTitleInput = document.createElement('textarea');
+//     midLargeBoxTitleInput.id = 'mid-large-box-title-input';
+//     midLargeBoxTitleInput.type = 'text';
+//     midLargeBoxTitleInput.placeholder = 'Title';
+//     midLargeBoxTitleInput.style.fontWeight = 'bold';
 
-    midLargeBoxTitle.appendChild(midLargeBoxTitleInput);
-    midLargeBox.appendChild(midLargeBoxTitle);
+//     midLargeBoxTitle.appendChild(midLargeBoxTitleInput);
+//     midLargeBox.appendChild(midLargeBoxTitle);
 
-    const midContent = document.createElement('div');
-    midContent.className = 'mid-large-box-content';
+//     const midContent = document.createElement('div');
+//     midContent.className = 'mid-large-box-content';
 
-    const midContentInput = document.createElement('textarea');
-    midContentInput.type = 'text';
-    midContentInput.className = 'mid-large-box-content-input';
-    midContentInput.placeholder = 'You can write here...';
+//     const midContentInput = document.createElement('textarea');
+//     midContentInput.type = 'text';
+//     midContentInput.className = 'mid-large-box-content-input';
+//     midContentInput.placeholder = 'You can write here...';
 
-    midContent.appendChild(midContentInput);
+//     midContent.appendChild(midContentInput);
 
-    const midSaveButton = document.createElement('button');
-    midSaveButton.type = 'button';
-    midSaveButton.className = 'mid-save-button';
-    midSaveButton.id = 'mid-save-button';
-    midSaveButton.textContent = 'Add';
+//     const midSaveButton = document.createElement('button');
+//     midSaveButton.type = 'button';
+//     midSaveButton.className = 'mid-save-button';
+//     midSaveButton.id = 'mid-save-button';
+//     midSaveButton.textContent = 'Add';
 
-    midContent.appendChild(midSaveButton);
-    midLargeBox.appendChild(midContent);
-    mideNoteTakingField.appendChild(midLargeBox);
+//     midContent.appendChild(midSaveButton);
+//     midLargeBox.appendChild(midContent);
+//     mideNoteTakingField.appendChild(midLargeBox);
 
-    midLargeBoxTitleInput.focus();
-}
-
+//     midLargeBoxTitleInput.focus();
+// }
 function search(query) {
     //hides all boxes
     for(let i = 0; i < localStorage.getItem('noteNum'); i++) {
@@ -178,13 +171,12 @@ function darkMode() {
         darkSearchInputColor.style.color = 'black';
     }
 }
-
 // Main function to run when the window loads
 window.addEventListener('load', function () {
     initializeLocalStorage();
     darkMode();
     loadBoxes();
-    createMiddleNote();
+    //createMiddleNote();
 
     // Single event listener for all clicks
     document.addEventListener('click', function (event) {
@@ -192,13 +184,16 @@ window.addEventListener('load', function () {
         
         const midNote = document.getElementById('mid-note-write');        
         const midLargeBox = document.getElementById('mid-large-box');
-        const midLargeBoxInput = document.getElementById('mid-large-box-title-input')
+        const midLargeBoxInput = document.getElementById('mid-large-box-title-input');
+        // const contentInput = document.querySelector('.mid-large-box-content-input');
         
         // Check if the clicked element or any of its parents have the class 'mid-note-write'
         if (target.closest('.mid-note-write')) {
             midNote.classList.add('gizle');
             midLargeBox.classList.remove('gizle');
             midLargeBoxInput.focus();
+            // midLargeBoxInput.placeholder = 'Title';
+            // contentInput.placeholder = 'You can write here...';
         } 
         else if (!target.closest('.mid-large-box')) {
             midNote.classList.remove('gizle');
@@ -213,7 +208,7 @@ window.addEventListener('load', function () {
         } else if (target.id.startsWith('button-delete')) {
             const noteIndex = target.id.replace('button-delete', '');
             const noteBoxesContainer = document.getElementById('note-boxes-container');
-            const eachBoxContainer = document.getElementById(`box${noteIndex}`).parentNode;
+            const eachBoxContainer = document.getElementById(`box${noteIndex}`);
             noteBoxesContainer.removeChild(eachBoxContainer);
             localStorage.removeItem(`note${noteIndex}`);
             localStorage.noteNum--;
@@ -228,17 +223,17 @@ window.addEventListener('load', function () {
             addBox(localStorage.noteNum);
             localStorage.noteNum++;
             titleInput.focus(); // cursor will be on title input
-        } else if(target.id === 'search-button') {
-            const searchInput = document.getElementById('header-search-input');
-            search(searchInput.value);
-        }
+        } //else if(target.id === 'search-button') {
+        //     const searchInput = document.getElementById('header-search-input');
+        //     search(searchInput.value);
+        //} 
         else if(target.id === 'dark-mode-button' || target.id === 'day-mode-button') {
-            localStorage.darkButtonClick++;
-            darkMode();
+                localStorage.darkButtonClick++;
+                darkMode();
         }
     }); 
 
-    document.addEventListener('keydown', function(event) {
+    document.addEventListener('input', function(event) {
         const midNote = document.getElementById('mid-note-write');
         const midLargeBox = document.getElementById('mid-large-box');
         const midLargeBoxInput = document.getElementById('mid-large-box-title-input')
