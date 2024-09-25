@@ -5,7 +5,7 @@ block content
     .header-search-container
       .header-search
         img(src="../../../images/search.png" id="search-button")
-        input(type="text" id="header-search-input" placeholder="Search")
+        input#header-search-input(type="text" placeholder="Search")
     img(src="../../../images/night-mode.png" id="dark-mode-button")
     img(src="../../../images/day-mode.png" id="day-mode-button")
   .mid-note-write-container#mid-note-write-container
@@ -13,9 +13,10 @@ block content
       input(type="text" id="mid-note-input" placeholder="Take Note...")
     .mid-large-box#mid-large-box.gizle
       .mid-large-box-title 
-        textarea#mid-large-box-title-input(placeholder="Title") 
+        input(type="text")#mid-large-box-title-input(placeholder="Title") 
       .mid-large-box-content
-        textarea.mid-large-box-content-input(placeholder="You can write here...") 
+        <textarea class="mid-large-box-content-input" placeholder="You can write here..."></textarea>  
+        // textarea arasında boşluk olunca placeholeder gözükmüyor bu yüzden html tarzında yazdım
         button.mid-save-button#mid-save-button(type="button") Add
   .main  
     .note-boxes-container#note-boxes-container    

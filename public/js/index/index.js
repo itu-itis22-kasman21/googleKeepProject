@@ -11,11 +11,10 @@ function initializeLocalStorage() {
 function loadBoxes() {
     for (let i = 0; i < localStorage.length; i++) {
         let key = localStorage.key(i);
-        if (key === 'noteNum' || key == 'darkButtonClick') {
-            continue;
-        } else {
+        if (localStorage.key(i).startsWith("note")) {
             let indexNote = localStorage.key(i).substring(4);
             addBox(Number(indexNote));
+
         }
     }
 }

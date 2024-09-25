@@ -19,7 +19,7 @@
 
     --dark-day-button-height: 50px;
 
-    --mid-note-write-container-margin: 25px 40px 25px; 
+    --mid-note-write-container-margin: 25px 25px 25px; 
 
     --mid-note-write-border-radius: 10px;
     --mid-note-write-padding: 0 10px 0;
@@ -49,7 +49,7 @@
     --gap-bw-main-boxes: 10px;
 
     --theme-color: white;
-    --text-color: black;
+    --text-color:   ;
     --border: none;
 
     
@@ -60,7 +60,7 @@
 }
 *{
     box-sizing: border-box;
-    color: var(--text-color);
+    color: var(--text-color) !important;
 } 
 html {
     margin: 0;
@@ -105,11 +105,11 @@ body {
 }
 .header-search:focus-within {
     box-shadow: var(--search-box-shadow);
-    background-color: white;
+    /* background-color: white; */
 }
-.header-search:focus-within #header-search-input {
+/* .header-search:focus-within #header-search-input {
     background-color: white; 
-}
+} */
 #dark-mode-button, #day-mode-button {
     position: relative;
     height: var(--dark-day-button-height);
@@ -122,6 +122,7 @@ body {
     border: none;
     outline: none;
     background-color: var(--search-background);
+    color: var(--text-color);
 }
 
 .mid-note-write-container {
@@ -183,14 +184,19 @@ body {
     height: calc(100% - var(--height-fBox-title) - var(--gap-bw-title-content));
     
 }   
-.mid-large-box-content::placeholder {
+#mid-large-box-content-input::placeholder {
+    width: 100%;
+    height: calc(100% - 18px);
     position: absolute;
     top: 0;
     transform: translateY(0); /* Ensures the placeholder is at the top */
     text-align: left; /* Aligns the placeholder text to the left */
+    vertical-align: top;
 }
-.mid-large-box-content-input {
+#mid-large-box-content-input, textarea {
     width: 100%;
+    text-align: left;
+    vertical-align: top;
     height: calc(100% - 18px);
     background-color: var(--theme-color);
 }
@@ -286,15 +292,16 @@ body {
     height: var(--search-button-height);
     width: auto;
 }
-
 img:hover {
     opacity: 0.5;
 }
-textarea {
+textarea, input {
+    background-color: var(--theme-color);
     border: 0;
     outline: 0;
     resize: none;
 }
+
 .gizle {
     display: none;
 }
@@ -302,6 +309,7 @@ textarea {
 @media (max-width: 650px) {
     .each-box {
         width: 100%;
+        height: 150px;
     }  
 }
 @media (max-width: 768px) {
